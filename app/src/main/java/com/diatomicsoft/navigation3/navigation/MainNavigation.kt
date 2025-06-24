@@ -12,8 +12,8 @@ import androidx.navigation3.runtime.EntryProviderBuilder
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import com.diatomicsoft.navigation3.ui.screens.posts.PostsRoute
 import com.diatomicsoft.navigation3.ui.screens.posts.PostsScreen
+import com.diatomicsoft.navigation3.ui.screens.posts.PostsState
 import com.diatomicsoft.navigation3.ui.screens.posts.PostsViewModel
 
 
@@ -56,19 +56,24 @@ fun MainNavigation() {
             entryProvider = entryProvider<Any> {
                 val viewModel = hiltViewModel<PostsViewModel>()
                 val state = viewModel.postState
-                entry<Posts> {
-                    PostsScreen(
-                        state
-                    ) {
-
-                    }
-                }
+                posts(state)
                 entry<Albums> { }
                 entry<Users> { }
             }
         )
     }
 
+}
+
+
+private fun EntryProviderBuilder<Any>.posts(state: PostsState) {
+    entry<Posts> {
+        PostsScreen(
+            state
+        ) {
+
+        }
+    }
 }
 
 
