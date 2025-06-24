@@ -18,8 +18,8 @@ data object Albums : TopLevelRoute{
     override val icon: ImageVector = Icons.Default.Album
 }
 
-data object UsersScreen: TopLevelRoute{
+data object Users: TopLevelRoute{
     override val icon: ImageVector = Icons.Filled.VerifiedUser
 }
 
- val TOP_LEVEL_ROUTES: List<TopLevelRoute> = listOf(Posts, Albums, UsersScreen)
+ val TOP_LEVEL_ROUTES: List<TopLevelRoute> = listOf(Posts, Albums, Users)

@@ -11,13 +11,11 @@ import androidx.navigation3.runtime.entry
 import com.diatomicsoft.navigation3.navigation.Posts
 
 @Composable
-fun EntryProviderBuilder<Any>.PostsRoute(
+fun EntryProviderBuilder<*>.PostsRoute(
     viewModel: PostsViewModel = hiltViewModel(),
     onItemClick: (id: Int) -> Unit
 ) {
-
     val state = viewModel.postState
-
     entry<Posts> {
         PostsScreen(
             state,
