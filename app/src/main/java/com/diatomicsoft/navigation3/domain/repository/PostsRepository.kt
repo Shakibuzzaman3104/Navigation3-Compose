@@ -1,10 +1,10 @@
 package com.diatomicsoft.navigation3.domain.repository
 
-import com.diatomicsoft.navigation3.data.model.Post
-import kotlinx.coroutines.flow.StateFlow
+import com.diatomicsoft.navigation3.data.model.ModelPost
+import kotlinx.coroutines.flow.Flow
 
 interface PostsRepository {
 
-    suspend fun fetchPosts(): StateFlow<List<Post>>
+    suspend fun fetchPosts(): Flow<List<ModelPost>>
 
 }

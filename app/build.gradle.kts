@@ -39,6 +39,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -71,6 +72,21 @@ dependencies {
 
     implementation(libs.moshi) // Or the latest version
     implementation(libs.moshi.kotlin) // For Kotlin extensions
+    ksp(libs.moshi.kotlin.codegen)
+
+    // Retrofit for Networking
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+
+    // OkHttp for interceptors and logging
+    implementation(libs.okhttp3.logging.interceptor)
+
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+
+    implementation (libs.timber)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
