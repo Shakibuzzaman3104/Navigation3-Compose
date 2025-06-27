@@ -1,14 +1,14 @@
 package com.diatomicsoft.navigation3.di
 
-import android.content.Context
 import com.diatomicsoft.navigation3.data.repository.PostsRepositoryImpl
 import com.diatomicsoft.navigation3.domain.repository.PostsRepository
-import com.squareup.moshi.Moshi
+import com.diatomicsoft.navigation3.local_storage.dao.PostDao
+import com.diatomicsoft.navigation3.network.api.PostsApiService
+import com.diatomicsoft.navigation3.network.utils.NetworkMonitor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 @Module
@@ -16,7 +16,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 class ViewModelModule {
 
     @Provides
-    fun provideLocalPostsRepository(@ApplicationContext context: Context, moshi: Moshi): PostsRepository =
-        PostsRepositoryImpl(context, moshi)
+    fun provideLocalPostsRepository(
+        api: PostsApiService,
+        dao: PostDao
+    ): PostsRepository =
+        PostsRepositoryImpl(api, dao)
 
 }
