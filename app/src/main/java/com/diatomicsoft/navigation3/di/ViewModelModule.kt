@@ -4,7 +4,6 @@ import com.diatomicsoft.navigation3.data.repository.PostsRepositoryImpl
 import com.diatomicsoft.navigation3.domain.repository.PostsRepository
 import com.diatomicsoft.navigation3.local_storage.dao.PostDao
 import com.diatomicsoft.navigation3.network.api.PostsApiService
-import com.diatomicsoft.navigation3.network.utils.NetworkMonitor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

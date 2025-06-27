@@ -5,6 +5,11 @@ import androidx.compose.runtime.Composable
 data class UserDetailsScreen(val userId: Int)
 
 @Composable
+fun UserDetailsScreenRoute(userId: Int) {
+    UserDetailsScreen()
+}
+
+@Composable
 fun UserDetailsScreen() {
 
 }

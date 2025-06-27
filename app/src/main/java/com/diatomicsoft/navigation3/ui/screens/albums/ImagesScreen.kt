@@ -5,6 +5,12 @@ import androidx.compose.runtime.Composable
 data class Images(val id: Int)
 
 @Composable
-fun ImagesScreen(){
+fun ImagesScreenRoute(
+) {
+    ImagesScreen()
+}
+
+@Composable
+fun ImagesScreen() {
 
 }

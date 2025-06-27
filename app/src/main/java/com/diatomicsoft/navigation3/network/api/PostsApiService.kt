@@ -9,13 +9,13 @@ import retrofit2.http.Query
 
 interface PostsApiService {
 
-    @GET("/posts")
-    fun getPosts(): Response<List<ModelPost>>
+    @GET("posts")
+    suspend fun getPosts(): Response<List<ModelPost>>
 
-    @GET("/posts/{id}")
-    fun getPost(@Path("id") id: Int): Response<ModelPost>
+    @GET("posts/{id}")
+    suspend fun getPost(@Path("id") id: Int): Response<ModelPost>
 
-    @GET("/comments")
-    fun getComments(@Query("postId") postId: Int): Response<List<ModelComment>>
+    @GET("comments")
+    suspend fun getComments(@Query("postId") postId: Int): Response<List<ModelComment>>
 
 }
