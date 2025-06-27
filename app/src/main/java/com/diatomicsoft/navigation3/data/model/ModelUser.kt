@@ -11,21 +11,21 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "users")
 @JsonClass(generateAdapter = true)
 data class ModelUser(
-    @Json(name = "address")
+    @param:Json(name = "address")
     val address: Address,
-    @Json(name = "company")
+    @param:Json(name = "company")
     val company: Company,
-    @Json(name = "email")
+    @param:Json(name = "email")
     val email: String,
     @PrimaryKey
-    @Json(name = "id")
+    @param:Json(name = "id")
     val id: Int,
-    @Json(name = "name")
+    @param:Json(name = "name")
     val name: String,
-    @Json(name = "phone")
+    @param:Json(name = "phone")
     val phone: String,
-    @Json(name = "username")
+    @param:Json(name = "username")
     val username: String,
-    @Json(name = "website")
+    @param:Json(name = "website")
     val website: String
 )

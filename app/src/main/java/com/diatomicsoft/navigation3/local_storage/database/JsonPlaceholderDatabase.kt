@@ -1,4 +1,4 @@
-package com.diatomicsoft.navigation3.local_storage.base
+package com.diatomicsoft.navigation3.local_storage.database
 
 import android.content.Context
 import androidx.room.Database
@@ -18,6 +18,11 @@ import com.diatomicsoft.navigation3.local_storage.converter.PhotoTypeConverter
 import com.diatomicsoft.navigation3.local_storage.converter.PostTypeConverter
 import com.diatomicsoft.navigation3.local_storage.converter.ToDoTypeConverter
 import com.diatomicsoft.navigation3.local_storage.converter.UserTypeConverter
+import com.diatomicsoft.navigation3.local_storage.dao.AlbumDao
+import com.diatomicsoft.navigation3.local_storage.dao.CommentDao
+import com.diatomicsoft.navigation3.local_storage.dao.PhotoDao
+import com.diatomicsoft.navigation3.local_storage.dao.PostDao
+import com.diatomicsoft.navigation3.local_storage.dao.ToDoDao
 import com.diatomicsoft.navigation3.local_storage.dao.UserDao
 import javax.inject.Singleton
 
@@ -40,7 +45,13 @@ import javax.inject.Singleton
 )
 abstract class JsonPlaceholderDatabase() :
     RoomDatabase() {
+
     abstract fun userDao(): UserDao
+    abstract fun postDao(): PostDao
+    abstract fun commentDao(): CommentDao
+    abstract fun albumDao(): AlbumDao
+    abstract fun photoDao(): PhotoDao
+    abstract fun toDoDao(): ToDoDao
 
     companion object {
         fun init(context: Context): JsonPlaceholderDatabase {
