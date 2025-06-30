@@ -13,7 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun PostsScreenRoute(
     viewModel: PostsViewModel = hiltViewModel(),
-    onPostClick: (Int) -> Unit
+    onPostClick: (Int, String, String?) -> Unit
 ) {
     LaunchedEffect(Unit) {
         viewModel.fetPosts()
@@ -23,7 +23,7 @@ fun PostsScreenRoute(
 }
 
 @Composable
-fun PostsScreen(state: PostsState, onPostClick: (Int) -> Unit) {
+fun PostsScreen(state: PostsState, onPostClick: (Int, String, String?) -> Unit) {
     Box(
         contentAlignment = Alignment.Center,
         content = {
@@ -37,7 +37,9 @@ fun PostsScreen(state: PostsState, onPostClick: (Int) -> Unit) {
 
                         Text(
                             post.title,
-                            modifier = Modifier.clickable(true, onClick = { onPostClick(post.id) })
+                            modifier = Modifier.clickable(
+                                true,
+                                onClick = { onPostClick(post.id, post.title, post.body) })
                         )
 
                     }

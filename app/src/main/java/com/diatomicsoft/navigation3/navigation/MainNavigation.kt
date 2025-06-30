@@ -1,6 +1,5 @@
 package com.diatomicsoft.navigation3.navigation
 
-import android.util.Log
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -31,28 +30,28 @@ fun MainNavigation() {
                     val isSelected =
                         derivedStateOf { topLevelRoute == topLevelBackStack.topLevelKey }
 
-                    NavigationBarItem(
-                        selected = isSelected.value,
-                        onClick = {
-                            topLevelBackStack.addTopLevel(topLevelRoute)
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = topLevelRoute.icon,
-                                contentDescription = null
-                            )
-                        }
-                    )
+                    NavigationBarItem(selected = isSelected.value, onClick = {
+                        topLevelBackStack.addTopLevel(topLevelRoute)
+                    }, icon = {
+                        Icon(
+                            imageVector = topLevelRoute.icon, contentDescription = null
+                        )
+                    })
                 }
             }
-        }
-    ) { padding ->
+        }) { padding ->
         NavDisplay(
             backStack = topLevelBackStack.backStack,
             onBack = { topLevelBackStack.removeLast() },
             entryProvider = entryProvider<Any> {
                 entry<PostsRoute> {
-                    PostsScreenRoute { postId -> topLevelBackStack.add(PostDetailsRoute(postId)) }
+                    PostsScreenRoute { postId, title, body ->
+                        topLevelBackStack.add(
+                            PostDetailsRoute(
+                                postId, title, body
+                            )
+                        )
+                    }
                 }
                 entry<AlbumsRoute> {
                     AlbumsScreenRoute()
@@ -64,11 +63,10 @@ fun MainNavigation() {
                     ToDoScreenRoute()
                 }
 
-                entry<PostDetailsRoute> { key->
-                    PostDetailsScreenRoute(key.id)
+                entry<PostDetailsRoute> { key ->
+                    PostDetailsScreenRoute()
                 }
-            }
-        )
+            })
     }
 }
 

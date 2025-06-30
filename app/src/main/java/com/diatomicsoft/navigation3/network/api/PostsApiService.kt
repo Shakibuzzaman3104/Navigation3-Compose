@@ -18,4 +18,7 @@ interface PostsApiService {
     @GET("comments")
     suspend fun getComments(@Query("postId") postId: Int): Response<List<ModelComment>>
 
+    @GET("comments/{commentId}")
+    suspend fun getComment(@Path("commentId") commentId: Int): Response<ModelComment>
+
 }
