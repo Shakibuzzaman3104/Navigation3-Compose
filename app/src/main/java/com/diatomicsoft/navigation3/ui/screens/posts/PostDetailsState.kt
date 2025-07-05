@@ -2,8 +2,6 @@ package com.diatomicsoft.navigation3.ui.screens.posts
 
 import com.diatomicsoft.navigation3.data.model.ModelComment
 
-sealed class PostDetails
-
 data class PostDetailsState(
     val isLoading: Boolean = false,
     val isRefreshing: Boolean = false,

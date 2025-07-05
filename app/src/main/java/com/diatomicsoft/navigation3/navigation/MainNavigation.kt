@@ -1,5 +1,6 @@
 package com.diatomicsoft.navigation3.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -7,14 +8,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.diatomicsoft.navigation3.ui.screens.albums.AlbumsScreenRoute
+import com.diatomicsoft.navigation3.ui.screens.albums.ImagesScreenRoute
 import com.diatomicsoft.navigation3.ui.screens.posts.PostDetailsRoute
 import com.diatomicsoft.navigation3.ui.screens.posts.PostDetailsScreenRoute
 import com.diatomicsoft.navigation3.ui.screens.posts.PostsScreenRoute
 import com.diatomicsoft.navigation3.ui.screens.todo.ToDoScreenRoute
+import com.diatomicsoft.navigation3.ui.screens.users.UserDetailsScreenRoute
 import com.diatomicsoft.navigation3.ui.screens.users.UsersScreenRoute
 
 @Composable
@@ -37,10 +41,12 @@ fun MainNavigation() {
                             imageVector = topLevelRoute.icon, contentDescription = null
                         )
                     })
+
                 }
             }
         }) { padding ->
         NavDisplay(
+            modifier = Modifier.padding(padding),
             backStack = topLevelBackStack.backStack,
             onBack = { topLevelBackStack.removeLast() },
             entryProvider = entryProvider<Any> {
@@ -54,17 +60,29 @@ fun MainNavigation() {
                     }
                 }
                 entry<AlbumsRoute> {
-                    AlbumsScreenRoute()
+                    AlbumsScreenRoute { albumId ->
+                        topLevelBackStack.add(ImagesRoute(albumId))
+                    }
                 }
                 entry<UsersRoute> {
-                    UsersScreenRoute()
+                    UsersScreenRoute { userId ->
+                        topLevelBackStack.add(UserDetailsRoute(userId))
+                    }
                 }
                 entry<ToDoRoute> {
                     ToDoScreenRoute()
                 }
 
                 entry<PostDetailsRoute> { key ->
-                    PostDetailsScreenRoute()
+                    PostDetailsScreenRoute(key.postId, key.title, key.body)
+                }
+
+                entry<UserDetailsRoute> {key ->
+                    UserDetailsScreenRoute(key.userId)
+                }
+
+                entry<ImagesRoute> {key ->
+                    ImagesScreenRoute(key.albumId)
                 }
             })
     }

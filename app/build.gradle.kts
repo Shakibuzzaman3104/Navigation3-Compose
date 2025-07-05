@@ -41,6 +41,9 @@ android {
         compose = true
         buildConfig = true
     }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -86,7 +89,9 @@ dependencies {
     implementation(libs.androidx.room.ktx)
 
 
+
     implementation (libs.timber)
+    implementation (libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

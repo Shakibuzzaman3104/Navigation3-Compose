@@ -10,12 +10,9 @@ import retrofit2.http.Query
 interface AlbumsApiService {
 
     @GET("/albums")
-    fun getAlbums(): Response<List<ModelAlbum>>
-
-    @GET("/albums/{id}")
-    fun getAlbum(@Path("id") id: Int): Response<ModelAlbum>
+    suspend fun getAlbums(): Response<List<ModelAlbum>>
 
     @GET("/photos")
-    fun getPhotos(@Query("albumId") albumId: Int): Response<List<ModelPhoto>>
+    suspend fun getPhotos(@Query("albumId") albumId: Int): Response<List<ModelPhoto>>
 
 }

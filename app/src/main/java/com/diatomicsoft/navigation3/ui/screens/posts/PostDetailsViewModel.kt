@@ -1,5 +1,6 @@
 package com.diatomicsoft.navigation3.ui.screens.posts
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -49,15 +50,16 @@ class PostDetailsViewModel @Inject constructor(
             initialValue = Resource.Loading<List<ModelComment>>()
         )
 
-    fun fetchComments() {
-        _comments.tryEmit(postId.value)
+    fun fetchComments(postId: Int) {
+        this.postId.tryEmit(postId)
+        _comments.tryEmit(postId)
     }
 
     fun onIntent(intent: PostDetailsIntent) {
         when (intent) {
             is PostDetailsIntent.RefreshData -> {
                 state = state.copy(isRefreshing = true)
-                fetchComments()
+                fetchComments(postId.value)
             }
         }
     }
@@ -75,6 +77,9 @@ class PostDetailsViewModel @Inject constructor(
     }
 
     init {
+        savedStateHandle.keys().forEach { key ->
+            Log.d("MyId", "${key}")
+        }
         postId.tryEmit(getParameterPostId() ?: 0)
 
         state = state.copy(
@@ -113,7 +118,7 @@ class PostDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             postId.collect {
                 if (it != 0) {
-                    fetchComments()
+                    fetchComments(postId.value)
                 } else {
                     state = state.copy(
                         isLoading = false,
@@ -122,6 +127,5 @@ class PostDetailsViewModel @Inject constructor(
                 }
             }
         }
-
     }
 }
