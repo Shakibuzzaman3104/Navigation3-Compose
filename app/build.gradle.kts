@@ -36,6 +36,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+        freeCompilerArgs = listOf("-Xannotation-default-target=param-property")
     }
     buildFeatures {
         compose = true
@@ -58,6 +59,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material3.windowsizeclass)
     implementation(libs.androidx.adaptive.layout)
+    
     //implementation(libs.androidx.material3.navigation3)
 
 

@@ -25,6 +25,8 @@ room = "2.7.2"
 timber = "5.0.1"
 coilCompose = "2.6.0"
 
+
+
 [libraries]
 
 # AndroidX Core
@@ -86,6 +88,7 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 # Timber
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
+
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }
