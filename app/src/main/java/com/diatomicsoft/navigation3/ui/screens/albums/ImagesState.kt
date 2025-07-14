@@ -1,6 +1,6 @@
 package com.diatomicsoft.navigation3.ui.screens.albums
 
-import com.diatomicsoft.navigation3.data.model.ModelPhoto
+import com.diatomicsoft.core.database.entity.ModelPhoto
 
 sealed class ImagesState {
     object Loading : ImagesState()

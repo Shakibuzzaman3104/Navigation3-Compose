@@ -1,11 +1,11 @@
 package com.diatomicsoft.navigation3.data.repository
 
-import com.diatomicsoft.navigation3.data.model.ModelAlbum
+import com.diatomicsoft.core.database.entity.ModelAlbum
+import com.diatomicsoft.core.database.dao.AlbumDao
 import com.diatomicsoft.navigation3.domain.repository.AlbumsRepository
-import com.diatomicsoft.navigation3.local_storage.dao.AlbumDao
-import com.diatomicsoft.navigation3.network.api.AlbumsApiService
-import com.diatomicsoft.navigation3.network.resource.NetworkBoundResource
-import com.diatomicsoft.navigation3.network.resource.Resource
+import com.diatomicsoft.core.network.api.AlbumsApiService
+import com.diatomicsoft.core.network.resource.NetworkBoundResource
+import com.diatomicsoft.core.network.resource.Resource
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 

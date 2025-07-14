@@ -1,6 +1,6 @@
 package com.diatomicsoft.navigation3.ui.screens.posts
 
-import com.diatomicsoft.navigation3.data.model.ModelComment
+import com.diatomicsoft.core.database.entity.ModelComment
 
 data class PostDetailsState(
     val isLoading: Boolean = false,

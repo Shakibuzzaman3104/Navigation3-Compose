@@ -10,15 +10,13 @@ import com.diatomicsoft.navigation3.domain.repository.ImagesRepository
 import com.diatomicsoft.navigation3.domain.repository.ToDoRepository
 import com.diatomicsoft.navigation3.domain.repository.UserDetailsRepository
 import com.diatomicsoft.navigation3.domain.repository.UsersRepository
-import com.diatomicsoft.navigation3.local_storage.dao.AlbumDao
-import com.diatomicsoft.navigation3.local_storage.dao.PhotoDao
-import com.diatomicsoft.navigation3.local_storage.dao.ToDoDao
-import com.diatomicsoft.navigation3.local_storage.dao.UserDao
-import com.diatomicsoft.navigation3.network.api.AlbumsApiService
-import com.diatomicsoft.navigation3.network.api.TodosApiService
-import com.diatomicsoft.navigation3.network.api.UsersApiService
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.diatomicsoft.core.database.dao.AlbumDao
+import com.diatomicsoft.core.database.dao.PhotoDao
+import com.diatomicsoft.core.database.dao.ToDoDao
+import com.diatomicsoft.core.database.dao.UserDao
+import com.diatomicsoft.core.network.api.AlbumsApiService
+import com.diatomicsoft.core.network.api.TodosApiService
+import com.diatomicsoft.core.network.api.UsersApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,11 +28,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    @Singleton
-    fun provideMoshi():Moshi = Moshi.Builder()
-        .addLast(KotlinJsonAdapterFactory())
-        .build()
 
 
     @Provides

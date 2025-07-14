@@ -3,9 +3,9 @@ package com.diatomicsoft.navigation3.ui.screens.posts
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.diatomicsoft.navigation3.data.model.ModelPost
+import com.diatomicsoft.core.database.entity.ModelPost
 import com.diatomicsoft.navigation3.domain.repository.PostsRepository
-import com.diatomicsoft.navigation3.network.resource.Resource
+import com.diatomicsoft.core.network.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

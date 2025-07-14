@@ -1,11 +1,11 @@
 package com.diatomicsoft.navigation3.data.repository
 
-import com.diatomicsoft.navigation3.data.model.ModelComment
+import com.diatomicsoft.core.database.entity.ModelComment
+import com.diatomicsoft.core.database.dao.CommentDao
 import com.diatomicsoft.navigation3.domain.repository.PostDetailsRepository
-import com.diatomicsoft.navigation3.local_storage.dao.CommentDao
-import com.diatomicsoft.navigation3.network.api.PostsApiService
-import com.diatomicsoft.navigation3.network.resource.NetworkBoundResource
-import com.diatomicsoft.navigation3.network.resource.Resource
+import com.diatomicsoft.core.network.api.PostsApiService
+import com.diatomicsoft.core.network.resource.NetworkBoundResource
+import com.diatomicsoft.core.network.resource.Resource
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 

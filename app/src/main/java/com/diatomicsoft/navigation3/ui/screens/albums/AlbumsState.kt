@@ -1,6 +1,6 @@
 package com.diatomicsoft.navigation3.ui.screens.albums
 
-import com.diatomicsoft.navigation3.data.model.ModelAlbum
+import com.diatomicsoft.core.database.entity.ModelAlbum
 
 sealed class AlbumsState {
     object Loading : AlbumsState()

@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.diatomicsoft.navigation3.data.model.ModelAlbum
+import com.diatomicsoft.core.database.entity.ModelAlbum
 
 @Composable
 fun AlbumsScreenRoute(navigateToImages: (Int) -> Unit) {

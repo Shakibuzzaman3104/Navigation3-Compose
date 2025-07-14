@@ -1,6 +1,6 @@
 package com.diatomicsoft.navigation3.ui.screens.users
 
-import com.diatomicsoft.navigation3.data.model.ModelUser
+import com.diatomicsoft.core.database.entity.ModelUser
 
 sealed class UsersState {
     object Loading : UsersState()

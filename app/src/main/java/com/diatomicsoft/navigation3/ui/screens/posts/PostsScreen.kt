@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.diatomicsoft.navigation3.data.model.ModelPost
+import com.diatomicsoft.core.database.entity.ModelPost
 import com.diatomicsoft.navigation3.ui.components.ErrorComponent
 import com.diatomicsoft.navigation3.ui.components.SearchComponent
 import com.diatomicsoft.navigation3.ui.components.SearchResultsInfo

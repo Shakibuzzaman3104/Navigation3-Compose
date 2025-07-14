@@ -1,8 +1,8 @@
 package com.diatomicsoft.navigation3.data.repository
 
-import com.diatomicsoft.navigation3.network.exceptions.NetworkException
-import com.diatomicsoft.navigation3.network.resource.Resource
-import com.diatomicsoft.navigation3.network.utils.NetworkMonitor
+import com.diatomicsoft.core.network.exceptions.NetworkException
+import com.diatomicsoft.core.network.resource.Resource
+import com.diatomicsoft.core.network.utils.NetworkMonitor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

@@ -3,7 +3,7 @@ package com.diatomicsoft.navigation3.ui.screens.users
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diatomicsoft.navigation3.domain.repository.UsersRepository
-import com.diatomicsoft.navigation3.network.resource.Resource
+import com.diatomicsoft.core.network.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
