@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -8,6 +9,7 @@ pluginManagement {
             }
         }
         mavenCentral()
+        maven("https://jitpack.io")
         gradlePluginPortal()
     }
 }
@@ -19,5 +21,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "NAvigation3"
+rootProject.name = "Navigation3"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
+include(":core:database")
+include(":core:network")

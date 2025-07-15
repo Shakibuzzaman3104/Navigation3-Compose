@@ -1,13 +1,16 @@
 package com.diatomicsoft.navigation3.di
 
-import android.content.Context
-import com.diatomicsoft.navigation3.data.repository.LocalPostsRepositoryImpl
+import com.diatomicsoft.navigation3.data.repository.PostDetailsRepositoryImpl
+import com.diatomicsoft.navigation3.data.repository.PostsRepositoryImpl
+import com.diatomicsoft.navigation3.domain.repository.PostDetailsRepository
 import com.diatomicsoft.navigation3.domain.repository.PostsRepository
+import com.diatomicsoft.core.database.dao.CommentDao
+import com.diatomicsoft.core.database.dao.PostDao
+import com.diatomicsoft.core.network.api.PostsApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 @Module
@@ -15,7 +18,17 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 class ViewModelModule {
 
     @Provides
-    fun provideLocalPostsRepository(@ApplicationContext context: Context): PostsRepository =
-        LocalPostsRepositoryImpl(context)
+    fun provideLocalPostsRepository(
+        api: PostsApiService,
+        dao: PostDao
+    ): PostsRepository =
+        PostsRepositoryImpl(api, dao)
+
+    @Provides
+    fun providePostDetailsRepository(
+        api: PostsApiService,
+        dao: CommentDao
+    ): PostDetailsRepository =
+        PostDetailsRepositoryImpl(api, dao)
 
 }

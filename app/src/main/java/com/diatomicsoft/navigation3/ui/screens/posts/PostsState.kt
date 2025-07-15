@@ -1,5 +1,17 @@
 package com.diatomicsoft.navigation3.ui.screens.posts
 
-import com.diatomicsoft.navigation3.data.model.Post
+import com.diatomicsoft.core.database.entity.ModelPost
 
-data class PostsState(val posts: List<Post> = emptyList<Post>(), val isPostsLoading: Boolean = false)
+data class PostsState(
+    val isLoading: Boolean = false,
+    val posts: List<ModelPost> = emptyList<ModelPost>(),
+    val error: String? = null
+)
+
+sealed class PostsIntent {
+    object RefreshData : PostsIntent()
+}
+
+sealed class PostsScreenEffect {
+    data class ShowSnackBar(val message: String) : PostsScreenEffect()
+}
