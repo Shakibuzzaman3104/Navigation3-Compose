@@ -1,16 +1,28 @@
 package com.diatomicsoft.navigation3.ui.components
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -31,7 +43,7 @@ fun SearchComponent(
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
-    
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -52,9 +64,9 @@ fun SearchComponent(
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(24.dp)
             )
-            
+
             Spacer(modifier = Modifier.width(12.dp))
-            
+
             TextField(
                 value = query,
                 onValueChange = onQueryChange,
@@ -83,10 +95,10 @@ fun SearchComponent(
                     }
                 )
             )
-            
+
             if (query.isNotEmpty()) {
                 IconButton(
-                    onClick = { 
+                    onClick = {
                         onQueryChange("")
                     }
                 ) {
@@ -109,7 +121,9 @@ fun SearchResultsInfo(
 ) {
     if (query.isNotEmpty()) {
         Text(
-            text = "Found $resultCount results for \"$query\"",            style = MaterialTheme.typography.bodySmall,            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            text = "Found $resultCount results for \"$query\"",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
     }

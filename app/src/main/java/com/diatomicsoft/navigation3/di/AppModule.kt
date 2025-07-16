@@ -1,11 +1,11 @@
 package com.diatomicsoft.navigation3.di
 
-import com.diatomicsoft.navigation3.data.repository.AlbumsRepositoryImpl
+import com.diatomicsoft.feature.album.data.AlbumsRepositoryImpl
 import com.diatomicsoft.navigation3.data.repository.ImagesRepositoryImpl
 import com.diatomicsoft.navigation3.data.repository.ToDoRepositoryImpl
 import com.diatomicsoft.navigation3.data.repository.UserDetailsRepositoryImpl
 import com.diatomicsoft.navigation3.data.repository.UsersRepositoryImpl
-import com.diatomicsoft.navigation3.domain.repository.AlbumsRepository
+import com.diatomicsoft.feature.album.domain.AlbumsRepository
 import com.diatomicsoft.navigation3.domain.repository.ImagesRepository
 import com.diatomicsoft.navigation3.domain.repository.ToDoRepository
 import com.diatomicsoft.navigation3.domain.repository.UserDetailsRepository
@@ -28,8 +28,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-
-
     @Provides
     @Singleton
     fun provideUsersRepository(usersApiService: UsersApiService, userDao: UserDao): UsersRepository = UsersRepositoryImpl(usersApiService, userDao)
@@ -49,5 +47,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideToDoRepository(todosApiService: TodosApiService, toDoDao: ToDoDao): ToDoRepository = ToDoRepositoryImpl(todosApiService, toDoDao)
+
+
 
 }

@@ -1,11 +1,11 @@
-package com.diatomicsoft.navigation3.data.repository
+package com.diatomicsoft.feature.album.data
 
-import com.diatomicsoft.core.database.entity.ModelAlbum
 import com.diatomicsoft.core.database.dao.AlbumDao
-import com.diatomicsoft.navigation3.domain.repository.AlbumsRepository
+import com.diatomicsoft.core.database.entity.ModelAlbum
 import com.diatomicsoft.core.network.api.AlbumsApiService
 import com.diatomicsoft.core.network.resource.NetworkBoundResource
 import com.diatomicsoft.core.network.resource.Resource
+import com.diatomicsoft.feature.album.domain.AlbumsRepository
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
@@ -15,6 +15,7 @@ class AlbumsRepositoryImpl(
 ) : AlbumsRepository {
 
     override suspend fun fetchAlbums(): Flow<Resource<List<ModelAlbum>>> {
+
         return object : NetworkBoundResource<List<ModelAlbum>, List<ModelAlbum>>() {
 
             override suspend fun loadFromDb(): Flow<List<ModelAlbum>> {

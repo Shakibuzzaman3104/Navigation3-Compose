@@ -1,11 +1,10 @@
-package com.diatomicsoft.navigation3.navigation
+package com.diatomicsoft.core.navigation
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import kotlin.collections.remove
 
 class TopLevelBackStack<T: Any>(startKey: T) {
 

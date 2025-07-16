@@ -2,7 +2,7 @@ package com.diatomicsoft.navigation3.ui.screens.albums
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.diatomicsoft.navigation3.domain.repository.AlbumsRepository
+import com.diatomicsoft.feature.album.domain.AlbumsRepository
 import com.diatomicsoft.core.network.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
