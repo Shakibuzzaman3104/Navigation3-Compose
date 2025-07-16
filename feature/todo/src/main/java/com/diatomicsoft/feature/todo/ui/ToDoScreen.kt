@@ -24,24 +24,39 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import com.diatomicsoft.core.ui.ErrorComponent
+import com.diatomicsoft.core.ui.LoadingComponent
+import com.diatomicsoft.core.ui.NetworkErrorComponent
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 
 @Composable
 fun ToDoScreenRoute() {
     val viewModel: ToDoViewModel = hiltViewModel()
     val currentState by viewModel.toDoState.collectAsState()
+    
     LaunchedEffect(key1 = true) {
         viewModel.getToDos()
     }
-    ToDoScreen(state = currentState)
+    
+    ToDoScreen(
+        state = currentState,
+        onRetry = { viewModel.getToDos() }
+    )
 }
 
 @Composable
-fun ToDoScreen(state: ToDoState) {
+fun ToDoScreen(
+    state: ToDoState,
+    onRetry: () -> Unit
+) {
     when (state) {
         is ToDoState.Loading -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
+            LoadingComponent(
+                modifier = Modifier.fillMaxSize(),
+                message = "Loading todos..."
+            )
         }
 
         is ToDoState.Success -> {
@@ -49,8 +64,21 @@ fun ToDoScreen(state: ToDoState) {
         }
 
         is ToDoState.Error -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = state.message)
+            val isNetworkError = state.message.contains("internet", ignoreCase = true) ||
+                    state.message.contains("network", ignoreCase = true) ||
+                    state.message.contains("connection", ignoreCase = true)
+            
+            if (isNetworkError) {
+                NetworkErrorComponent(
+                    onRetry = onRetry,
+                    modifier = Modifier.fillMaxSize()
+                )
+            } else {
+                ErrorComponent(
+                    errorMessage = state.message,
+                    onRetry = onRetry,
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }
@@ -58,9 +86,44 @@ fun ToDoScreen(state: ToDoState) {
 
 @Composable
 fun ToDoList(todos: List<ModelToDo>) {
-    LazyColumn {
-        items(todos) {
-            ToDoItem(todo = it)
+    if (todos.isEmpty()) {
+        EmptyTodosState(modifier = Modifier.fillMaxSize())
+    } else {
+        LazyColumn(
+            contentPadding = PaddingValues(bottom = 16.dp)
+        ) {
+            items(
+                items = todos,
+                key = { it.id }
+            ) { todo ->
+                ToDoItem(todo = todo)
+            }
+        }
+    }
+}
+
+@Composable
+private fun EmptyTodosState(
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "No todos found",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Medium
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Your todo list is empty",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

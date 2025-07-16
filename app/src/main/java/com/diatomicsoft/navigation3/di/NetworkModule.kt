@@ -5,9 +5,6 @@ import com.diatomicsoft.core.network.api.PostsApiService
 import com.diatomicsoft.core.network.api.TodosApiService
 import com.diatomicsoft.core.network.api.UsersApiService
 import com.diatomicsoft.core.network.di.BaseUrl
-import com.diatomicsoft.core.network.interceptors.AuthInterceptor
-import com.diatomicsoft.core.network.interceptors.NetworkLoggingInterceptor
-import com.diatomicsoft.navigation3.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

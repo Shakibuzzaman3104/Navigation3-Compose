@@ -2,13 +2,15 @@ package com.diatomicsoft.feature.album.presentation.images
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,24 +25,36 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.diatomicsoft.core.database.entity.ModelPhoto
+import com.diatomicsoft.core.ui.ErrorComponent
+import com.diatomicsoft.core.ui.LoadingComponent
+import com.diatomicsoft.core.ui.NetworkErrorComponent
 
 @Composable
 fun ImagesScreenRoute(albumId: Int) {
     val viewModel: ImagesViewModel = hiltViewModel()
     val currentState by viewModel.imagesState.collectAsState()
+    
     LaunchedEffect(key1 = true) {
         viewModel.getImages(albumId)
     }
-    ImagesScreen(state = currentState)
+    
+    ImagesScreen(
+        state = currentState,
+        onRetry = { viewModel.getImages(albumId) }
+    )
 }
 
 @Composable
-fun ImagesScreen(state: ImagesState) {
+fun ImagesScreen(
+    state: ImagesState,
+    onRetry: () -> Unit
+) {
     when (state) {
         is ImagesState.Loading -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
+            LoadingComponent(
+                modifier = Modifier.fillMaxSize(),
+                message = "Loading images..."
+            )
         }
 
         is ImagesState.Success -> {
@@ -48,8 +62,21 @@ fun ImagesScreen(state: ImagesState) {
         }
 
         is ImagesState.Error -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = state.message)
+            val isNetworkError = state.message.contains("internet", ignoreCase = true) ||
+                    state.message.contains("network", ignoreCase = true) ||
+                    state.message.contains("connection", ignoreCase = true)
+            
+            if (isNetworkError) {
+                NetworkErrorComponent(
+                    onRetry = onRetry,
+                    modifier = Modifier.fillMaxSize()
+                )
+            } else {
+                ErrorComponent(
+                    errorMessage = state.message,
+                    onRetry = onRetry,
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }
@@ -57,9 +84,44 @@ fun ImagesScreen(state: ImagesState) {
 
 @Composable
 fun ImagesList(images: List<ModelPhoto>) {
-    LazyColumn {
-        items(images.size) { index ->
-            ImageItem(image = images[index])
+    if (images.isEmpty()) {
+        EmptyImagesState(modifier = Modifier.fillMaxSize())
+    } else {
+        LazyColumn(
+            contentPadding = PaddingValues(bottom = 16.dp)
+        ) {
+            items(
+                items = images,
+                key = { it.id }
+            ) { image ->
+                ImageItem(image = image)
+            }
+        }
+    }
+}
+
+@Composable
+private fun EmptyImagesState(
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "No images found",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Medium
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "This album is empty",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

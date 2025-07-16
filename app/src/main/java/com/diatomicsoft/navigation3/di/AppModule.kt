@@ -48,6 +48,4 @@ object AppModule {
     @Singleton
     fun provideToDoRepository(todosApiService: TodosApiService, toDoDao: ToDoDao): ToDoRepository = ToDoRepositoryImpl(todosApiService, toDoDao)
 
-
-
 }

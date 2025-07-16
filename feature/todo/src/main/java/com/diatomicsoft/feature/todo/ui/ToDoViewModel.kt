@@ -7,6 +7,7 @@ import com.diatomicsoft.core.network.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +20,10 @@ class ToDoViewModel @Inject constructor(private val repo: ToDoRepository) : View
     fun getToDos() {
         viewModelScope.launch {
             try {
-                repo.fetchToDos().collectLatest {
+                repo.fetchToDos().catch { throwable ->
+                    // Catch any exceptions in the flow and emit error state
+                    _toDoState.value = ToDoState.Error(throwable.message ?: "An unexpected error occurred")
+                }.collectLatest {
                     when (it) {
                         is Resource.Loading -> _toDoState.value = ToDoState.Loading
                         is Resource.Success -> _toDoState.value = ToDoState.Success(it.data ?: emptyList())
