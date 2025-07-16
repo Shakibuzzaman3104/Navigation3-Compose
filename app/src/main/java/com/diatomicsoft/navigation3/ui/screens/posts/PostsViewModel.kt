@@ -4,7 +4,7 @@ import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diatomicsoft.core.database.entity.ModelPost
-import com.diatomicsoft.navigation3.domain.repository.PostsRepository
+import com.diatomicsoft.feature.posts.domain.PostsRepository
 import com.diatomicsoft.core.network.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -4,8 +4,8 @@ import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diatomicsoft.core.database.entity.ModelPost
-import com.diatomicsoft.navigation3.domain.repository.PostsRepository
 import com.diatomicsoft.core.network.resource.Resource
+import com.diatomicsoft.feature.posts.domain.PostsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -15,14 +15,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostsViewModelEnhanced @Inject constructor(
+class PostsViewModel @Inject constructor(
     private val repository: PostsRepository
 ) : ViewModel() {
 
-    var postState by mutableStateOf(PostsStateEnhanced())
-        private set
-    
-    var searchQuery by mutableStateOf("")
+    var postState by mutableStateOf(PostsState())
         private set
 
     private val _posts = MutableSharedFlow<Unit>(
@@ -37,24 +34,33 @@ class PostsViewModelEnhanced @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = Resource.Loading<List<ModelPost>>()
+            initialValue = Resource.Loading()
         )
 
-    // Search functionality
-    @OptIn(FlowPreview::class)
-    val filteredPosts: List<ModelPost> by derivedStateOf {
-        if (searchQuery.isBlank()) {
-            postState.posts
-        } else {
-            postState.posts.filter { post ->
-                post.title.contains(searchQuery, ignoreCase = true) ||
-                post.body.contains(searchQuery, ignoreCase = true)
+    fun onIntent(intent: PostsIntent) {
+        when (intent) {
+            PostsIntent.RefreshData -> {
+                refreshPosts()
+            }
+
+            is PostsIntent.UpdateSearchQuery -> {
+                updateSearchQuery(intent.query)
             }
         }
     }
 
     fun updateSearchQuery(query: String) {
-        searchQuery = query
+        postState = postState.copy(searchQuery = query)
+        filterPosts(query)
+    }
+
+    private fun filterPosts(query: String) {
+        postState = postState.copy(
+            filteredPosts = postState.posts.filter { post ->
+                post.title.contains(query, ignoreCase = true) ||
+                        post.body.contains(query, ignoreCase = true)
+            }
+        )
     }
 
     fun fetchPosts() {
@@ -78,11 +84,13 @@ class PostsViewModelEnhanced @Inject constructor(
                             error = resource.message ?: "Unknown error occurred"
                         )
                     }
+
                     is Resource.Loading -> {
                         if (!postState.isRefreshing) {
                             postState = postState.copy(isLoading = true)
                         }
                     }
+
                     is Resource.Success -> {
                         postState = postState.copy(
                             isLoading = false,
@@ -96,10 +104,3 @@ class PostsViewModelEnhanced @Inject constructor(
         }
     }
 }
-
-data class PostsStateEnhanced(
-    val isLoading: Boolean = false,
-    val isRefreshing: Boolean = false,
-    val posts: List<ModelPost> = emptyList(),
-    val error: String? = null
-)

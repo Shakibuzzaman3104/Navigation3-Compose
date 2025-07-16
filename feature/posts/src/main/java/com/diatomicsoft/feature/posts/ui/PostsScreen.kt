@@ -17,43 +17,57 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.diatomicsoft.core.database.entity.ModelPost
 import com.diatomicsoft.core.navigation.NavigationDestination
+import com.diatomicsoft.core.ui.ErrorComponent
+import com.diatomicsoft.core.ui.ShimmerLoading
 import com.diatomicsoft.feature.posts.components.SearchComponent
 import com.diatomicsoft.feature.posts.components.SearchResultsInfo
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun PostsScreenRoute(
-    viewModel: PostsViewModelEnhanced = hiltViewModel(),
+    viewModel: PostsViewModel = hiltViewModel(),
     onPostClick: (NavigationDestination) -> Unit
 ) {
-    val state = viewModel.postState
-    val searchQuery = viewModel.searchQuery
-    val filteredPosts = viewModel.filteredPosts
 
     LaunchedEffect(Unit) {
         viewModel.fetchPosts()
     }
 
+    val state = viewModel.postState
+
+    PostsScreen(state, viewModel::onIntent, onPostClick)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PostsScreen(
+    state: PostsState,
+    intent: (PostsIntent) -> Unit,
+    onPostClick: (NavigationDestination) -> Unit,
+) {
+
     PullToRefreshBox(
         isRefreshing = state.isRefreshing,
-        onRefresh = { viewModel.refreshPosts() }
+        onRefresh = { intent(PostsIntent.RefreshData) }
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
             // Search Component
             SearchComponent(
-                query = searchQuery,
-                onQueryChange = viewModel::updateSearchQuery,
+                query = state.searchQuery,
+                onQueryChange = { newQuery ->
+                    intent(PostsIntent.UpdateSearchQuery(newQuery))
+                },
                 onSearch = { /* Search is handled automatically through filteredPosts */ },
                 placeholder = "Search posts..."
             )
 
             // Search Results Info
-            if (searchQuery.isNotEmpty()) {
+            if (state.searchQuery.isNotEmpty()) {
                 SearchResultsInfo(
-                    query = searchQuery,
-                    resultCount = filteredPosts.size
+                    query = state.searchQuery,
+                    resultCount = state.filteredPosts.size
                 )
             }
 
@@ -62,7 +76,7 @@ fun PostsScreenRoute(
                 state.error != null && state.posts.isEmpty() -> {
                     ErrorComponent(
                         errorMessage = state.error,
-                        onRetry = { viewModel.fetchPosts() },
+                        onRetry = { intent(PostsIntent.RefreshData) },
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -73,7 +87,7 @@ fun PostsScreenRoute(
 
                 else -> {
                     PostsList(
-                        posts = if (searchQuery.isNotEmpty()) filteredPosts else state.posts,
+                        posts = if (state.searchQuery.isNotEmpty()) state.filteredPosts else state.posts,
                         onPostClick = onPostClick,
                         modifier = Modifier.fillMaxSize()
                     )
@@ -200,39 +214,6 @@ private fun EnhancedPostItem(
                 overflow = TextOverflow.Ellipsis,
                 lineHeight = MaterialTheme.typography.bodyMedium.lineHeight
             )
-        }
-    }
-}
-
-// Keep the original simple PostItem for backward compatibility
-@Composable
-fun PostItem(post: ModelPost, onPostClick: (Int, String, String?) -> Unit) {
-    EnhancedPostItem(post = post, onPostClick = onPostClick)
-}
-
-// Original PostsScreen function for backward compatibility
-@Composable
-fun PostsScreen(state: PostsState, onPostClick: (Int, String, String?) -> Unit) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        if (state.error != null) {
-            Text(text = state.error, color = MaterialTheme.colorScheme.error)
-        } else {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(state.posts) { post ->
-                    PostItem(post = post) { postId, title, body ->
-                        onPostClick(postId, title, body)
-                    }
-                    Spacer(modifier = Modifier.padding(horizontal = 16.dp))
-                }
-            }
-        }
-        if (state.isLoading) {
-            CircularProgressIndicator()
         }
     }
 }

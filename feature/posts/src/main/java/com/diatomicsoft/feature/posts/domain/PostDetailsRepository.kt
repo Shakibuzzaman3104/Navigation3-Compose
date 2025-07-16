@@ -1,4 +1,4 @@
-package com.diatomicsoft.navigation3.domain.repository
+package com.diatomicsoft.feature.posts.domain
 
 import com.diatomicsoft.core.database.entity.ModelComment
 import com.diatomicsoft.core.network.resource.Resource

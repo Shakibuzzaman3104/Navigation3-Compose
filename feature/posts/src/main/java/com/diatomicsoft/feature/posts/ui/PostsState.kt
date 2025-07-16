@@ -4,12 +4,16 @@ import com.diatomicsoft.core.database.entity.ModelPost
 
 data class PostsState(
     val isLoading: Boolean = false,
-    val posts: List<ModelPost> = emptyList<ModelPost>(),
+    val isRefreshing: Boolean = false,
+    val posts: List<ModelPost> = emptyList(),
+    val filteredPosts: List<ModelPost> = emptyList(),
+    val searchQuery: String = "",
     val error: String? = null
 )
 
 sealed class PostsIntent {
     object RefreshData : PostsIntent()
+    data class UpdateSearchQuery(val query: String) : PostsIntent()
 }
 
 sealed class PostsScreenEffect {

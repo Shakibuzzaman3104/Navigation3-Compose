@@ -8,7 +8,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diatomicsoft.core.database.entity.ModelComment
-import com.diatomicsoft.navigation3.domain.repository.PostDetailsRepository
+import com.diatomicsoft.feature.posts.domain.PostDetailsRepository
 import com.diatomicsoft.core.network.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

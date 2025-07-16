@@ -16,6 +16,7 @@ fun EntryProviderBuilder<Any>.postsScreenEntry(
     }
 }
 
+
 fun EntryProviderBuilder<Any>.postsDetailsScreenEntry() {
     entry<NavigationRoute.PostDetailsRoute> { key ->
         PostDetailsScreenRoute(key.postId, key.title, key.body)

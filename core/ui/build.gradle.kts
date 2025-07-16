@@ -1,5 +1,8 @@
 plugins {
-    alias(libs.plugins.diatomicsoft.android.feature)
+    alias(libs.plugins.diatomicsoft.android.library)
+    alias(libs.plugins.diatomicsoft.android.library.compose)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -7,4 +10,5 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.material.icons.extended)
 }

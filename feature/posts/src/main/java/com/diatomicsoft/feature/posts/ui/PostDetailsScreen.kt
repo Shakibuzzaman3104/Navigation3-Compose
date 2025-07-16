@@ -21,10 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.diatomicsoft.core.database.entity.ModelComment
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class PostDetailsRoute(val postId: Int, val title: String, val body: String? = null)
 
 @Composable
 fun PostDetailsScreenRoute(

@@ -1,11 +1,11 @@
-package com.diatomicsoft.navigation3.data.repository
+package com.diatomicsoft.feature.posts.data
 
-import com.diatomicsoft.core.database.entity.ModelComment
 import com.diatomicsoft.core.database.dao.CommentDao
-import com.diatomicsoft.navigation3.domain.repository.PostDetailsRepository
+import com.diatomicsoft.core.database.entity.ModelComment
 import com.diatomicsoft.core.network.api.PostsApiService
 import com.diatomicsoft.core.network.resource.NetworkBoundResource
 import com.diatomicsoft.core.network.resource.Resource
+import com.diatomicsoft.feature.posts.domain.PostDetailsRepository
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
@@ -70,4 +70,3 @@ class PostDetailsRepositoryImpl(
     }
 
 }
-

@@ -1,12 +1,13 @@
-package com.diatomicsoft.navigation3.data.repository
+package com.diatomicsoft.feature.posts.data
 
-import com.diatomicsoft.core.database.entity.ModelPost
 import com.diatomicsoft.core.database.dao.PostDao
-import com.diatomicsoft.navigation3.domain.repository.PostsRepository
+import com.diatomicsoft.core.database.entity.ModelPost
 import com.diatomicsoft.core.network.api.PostsApiService
 import com.diatomicsoft.core.network.resource.NetworkBoundResource
 import com.diatomicsoft.core.network.resource.Resource
+import com.diatomicsoft.feature.posts.domain.PostsRepository
 import kotlinx.coroutines.flow.Flow
+import retrofit2.HttpException
 
 class PostsRepositoryImpl(
     private val api: PostsApiService,
@@ -29,7 +30,7 @@ class PostsRepositoryImpl(
                 if (response.isSuccessful) {
                     return response.body() ?: emptyList()
                 } else {
-                    throw retrofit2.HttpException(response)
+                    throw HttpException(response)
                 }
             }
 
@@ -54,7 +55,7 @@ class PostsRepositoryImpl(
                 if (response.isSuccessful) {
                     return response.body()!!
                 } else {
-                    throw retrofit2.HttpException(response)
+                    throw HttpException(response)
                 }
             }
 
@@ -69,4 +70,3 @@ class PostsRepositoryImpl(
     }
 
 }
-
