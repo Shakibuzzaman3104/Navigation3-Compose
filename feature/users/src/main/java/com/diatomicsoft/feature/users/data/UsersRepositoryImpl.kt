@@ -39,9 +39,6 @@ class UsersRepositoryImpl @Inject constructor(
                 dao.insertUsers(item)
             }
 
-            override fun onFetchFailed(throwable: Throwable) {
-                throwable.printStackTrace()
-            }
         }.asFlow()
     }
 }

@@ -1,6 +1,8 @@
 package com.diatomicsoft.core.network.exceptions
 
-sealed class NetworkException(message: String) : Exception(message) {
+import java.io.IOException
+
+sealed class NetworkException(message: String) : IOException(message) {
     class NoInternetException : NetworkException("No internet connection available")
     class ServerException(val code: Int, message: String) : NetworkException("Server error: $code - $message")
     class UnknownException(message: String) : NetworkException("Unknown error: $message")

@@ -37,18 +37,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                         }
                         // Handle other IOExceptions as errors
                         Timber.e(throwable, "NetworkBoundResource: Network fetch failed")
-                        onFetchFailed(throwable)
 
-                        emitAll(loadFromDb().map {
-                            Resource.Error(throwable.message ?: "Network error occurred", it)
-                        })
-                    }
-
-                    is NetworkException -> {
-                        // Handle all NetworkException types with their specific messages
-                        Timber.e(throwable, "NetworkBoundResource: Network exception occurred")
-                        onFetchFailed(throwable)
-                        
                         emitAll(loadFromDb().map {
                             Resource.Error(throwable.message ?: "Network error occurred", it)
                         })
@@ -57,7 +46,6 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     else -> {
                         // Log the error for debugging
                         Timber.e(throwable, "NetworkBoundResource: Network fetch failed")
-                        onFetchFailed(throwable)
 
                         // Emit error with cached data if available
                         emitAll(loadFromDb().map {
@@ -92,5 +80,4 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     protected abstract suspend fun fetchFromNetwork(): RequestType
     protected abstract suspend fun saveNetworkResult(item: RequestType)
     protected abstract fun shouldFetch(data: ResultType?): Boolean
-    protected open fun onFetchFailed(throwable: Throwable) {}
 }

@@ -12,6 +12,10 @@ class ErrorInterceptor @Inject constructor(
     private val networkUtils: NetworkUtils
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
+        if (!networkUtils.isNetworkAvailable()) {
+            throw NetworkException.NoInternetException()
+        }
+
         val request = chain.request()
         val response = try {
             chain.proceed(request)

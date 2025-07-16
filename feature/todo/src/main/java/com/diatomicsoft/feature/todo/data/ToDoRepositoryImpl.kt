@@ -39,9 +39,6 @@ class ToDoRepositoryImpl @Inject constructor(
                 dao.insertAll(item)
             }
 
-            override fun onFetchFailed(throwable: Throwable) {
-                throwable.printStackTrace()
-            }
         }.asFlow()
     }
 }

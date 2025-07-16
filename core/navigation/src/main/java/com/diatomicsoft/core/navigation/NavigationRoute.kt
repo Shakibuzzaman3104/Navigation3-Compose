@@ -1,10 +1,11 @@
 package com.diatomicsoft.core.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Note
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Album
-import androidx.compose.material.icons.filled.LocalPostOffice
-import androidx.compose.material.icons.filled.Note
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Pages
+import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NamedNavArgument
@@ -49,7 +50,7 @@ sealed interface TopLevelRoute {
 
 @Serializable
 data object PostsRoute : TopLevelRoute {
-    override val icon = Icons.Default.LocalPostOffice
+    override val icon = Icons.Default.Pages
 }
 
 @Serializable
@@ -59,12 +60,12 @@ data object AlbumsRoute : TopLevelRoute {
 
 @Serializable
 data object UsersRoute : TopLevelRoute {
-    override val icon: ImageVector = Icons.Filled.VerifiedUser
+    override val icon: ImageVector = Icons.Filled.People
 }
 
 @Serializable
 data object ToDoRoute : TopLevelRoute {
-    override val icon: ImageVector = Icons.Filled.Note
+    override val icon: ImageVector = Icons.AutoMirrored.Filled.List
 }
 
 val TOP_LEVEL_ROUTES: List<TopLevelRoute> = listOf(PostsRoute, AlbumsRoute, ToDoRoute, UsersRoute)
