@@ -5,8 +5,8 @@ import androidx.navigation3.runtime.entry
 import com.diatomicsoft.core.navigation.NavigationDestination
 import com.diatomicsoft.core.navigation.NavigationRoute
 import com.diatomicsoft.core.navigation.PostsRoute
-import com.diatomicsoft.feature.posts.ui.PostDetailsScreenRoute
-import com.diatomicsoft.feature.posts.ui.PostsScreenRoute
+import com.diatomicsoft.feature.posts.presentation.post_details.PostDetailsScreenRoute
+import com.diatomicsoft.feature.posts.presentation.posts.PostsScreenRoute
 
 fun EntryProviderBuilder<Any>.postsScreenEntry(
     onItemClick: (NavigationDestination) -> Unit

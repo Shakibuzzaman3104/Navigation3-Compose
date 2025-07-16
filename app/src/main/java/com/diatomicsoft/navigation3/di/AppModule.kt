@@ -1,15 +1,15 @@
 package com.diatomicsoft.navigation3.di
 
 import com.diatomicsoft.feature.album.data.AlbumsRepositoryImpl
-import com.diatomicsoft.navigation3.data.repository.ImagesRepositoryImpl
-import com.diatomicsoft.navigation3.data.repository.ToDoRepositoryImpl
-import com.diatomicsoft.navigation3.data.repository.UserDetailsRepositoryImpl
-import com.diatomicsoft.navigation3.data.repository.UsersRepositoryImpl
+import com.diatomicsoft.feature.album.data.ImagesRepositoryImpl
+import com.diatomicsoft.feature.todo.data.ToDoRepositoryImpl
+import com.diatomicsoft.feature.users.data.UserDetailsRepositoryImpl
+import com.diatomicsoft.feature.users.data.UsersRepositoryImpl
 import com.diatomicsoft.feature.album.domain.AlbumsRepository
-import com.diatomicsoft.navigation3.domain.repository.ImagesRepository
-import com.diatomicsoft.navigation3.domain.repository.ToDoRepository
-import com.diatomicsoft.navigation3.domain.repository.UserDetailsRepository
-import com.diatomicsoft.navigation3.domain.repository.UsersRepository
+import com.diatomicsoft.feature.album.domain.ImagesRepository
+import com.diatomicsoft.feature.todo.domain.ToDoRepository
+import com.diatomicsoft.feature.users.domain.UserDetailsRepository
+import com.diatomicsoft.feature.users.domain.UsersRepository
 import com.diatomicsoft.core.database.dao.AlbumDao
 import com.diatomicsoft.core.database.dao.PhotoDao
 import com.diatomicsoft.core.database.dao.ToDoDao

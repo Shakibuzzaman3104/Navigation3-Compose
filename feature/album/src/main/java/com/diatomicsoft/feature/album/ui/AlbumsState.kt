@@ -1,9 +1,0 @@
-package com.diatomicsoft.feature.album.ui
-
-import com.diatomicsoft.core.database.entity.ModelAlbum
-
-sealed class AlbumsState {
-    object Loading : AlbumsState()
-    data class Success(val albums: List<ModelAlbum>?) : AlbumsState()
-    data class Error(val message: String) : AlbumsState()
-}
