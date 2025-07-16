@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.diatomicsoft.core.database.entity.ModelUser
 import com.diatomicsoft.core.ui.ErrorComponent
-import com.diatomicsoft.core.ui.LoadingComponent
+import com.diatomicsoft.core.ui.UsersShimmerLoading
 import com.diatomicsoft.core.ui.NetworkErrorComponent
 
 @Composable
@@ -52,9 +52,8 @@ fun UsersScreen(
 ) {
     when (state) {
         is UsersState.Loading -> {
-            LoadingComponent(
-                modifier = Modifier.fillMaxSize(),
-                message = "Loading users..."
+            UsersShimmerLoading(
+                modifier = Modifier.fillMaxSize()
             )
         }
 

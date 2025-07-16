@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.diatomicsoft.core.database.entity.ModelAlbum
 import com.diatomicsoft.core.ui.ErrorComponent
-import com.diatomicsoft.core.ui.LoadingComponent
+import com.diatomicsoft.core.ui.AlbumsShimmerLoading
 import com.diatomicsoft.core.ui.NetworkErrorComponent
 
 @Composable
@@ -52,9 +52,8 @@ fun AlbumsScreen(
 ) {
     when (state) {
         is AlbumsState.Loading -> {
-            LoadingComponent(
-                modifier = Modifier.fillMaxSize(),
-                message = "Loading albums..."
+            AlbumsShimmerLoading(
+                modifier = Modifier.fillMaxSize()
             )
         }
 

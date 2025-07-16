@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.diatomicsoft.core.database.entity.ModelUser
 import com.diatomicsoft.core.ui.ErrorComponent
-import com.diatomicsoft.core.ui.LoadingComponent
+import com.diatomicsoft.core.ui.ShimmerUserDetails
 import com.diatomicsoft.core.ui.NetworkErrorComponent
 
 
@@ -43,9 +43,8 @@ fun UserDetailsScreen(
 ) {
     when (state) {
         is UserDetailsState.Loading -> {
-            LoadingComponent(
-                modifier = Modifier.fillMaxSize(),
-                message = "Loading user details..."
+            ShimmerUserDetails(
+                modifier = Modifier.fillMaxSize()
             )
         }
 

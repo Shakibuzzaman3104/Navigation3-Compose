@@ -26,7 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.diatomicsoft.core.database.entity.ModelPhoto
 import com.diatomicsoft.core.ui.ErrorComponent
-import com.diatomicsoft.core.ui.LoadingComponent
+import com.diatomicsoft.core.ui.ImagesShimmerLoading
 import com.diatomicsoft.core.ui.NetworkErrorComponent
 
 @Composable
@@ -51,9 +51,8 @@ fun ImagesScreen(
 ) {
     when (state) {
         is ImagesState.Loading -> {
-            LoadingComponent(
-                modifier = Modifier.fillMaxSize(),
-                message = "Loading images..."
+            ImagesShimmerLoading(
+                modifier = Modifier.fillMaxSize()
             )
         }
 

@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
+import com.diatomicsoft.core.ui.ShimmerLoading
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,7 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import com.diatomicsoft.core.ui.ErrorComponent
-import com.diatomicsoft.core.ui.LoadingComponent
+import com.diatomicsoft.core.ui.ToDoShimmerLoading
 import com.diatomicsoft.core.ui.NetworkErrorComponent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -53,9 +53,8 @@ fun ToDoScreen(
 ) {
     when (state) {
         is ToDoState.Loading -> {
-            LoadingComponent(
-                modifier = Modifier.fillMaxSize(),
-                message = "Loading todos..."
+            ToDoShimmerLoading(
+                modifier = Modifier.fillMaxSize()
             )
         }
 
