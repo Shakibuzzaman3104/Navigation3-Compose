@@ -2,7 +2,7 @@
 
 A comprehensive showcase of modern Android development using **MVI architecture** with **Unidirectional Data Flow (UDF)**, **Clean Architecture**, and **Multi-modular architecture**. This project demonstrates the latest **Navigation3** library from Google and serves as a guideline for developers adopting these cutting-edge technologies.
 
-## 🚀 Project Highlights
+## Project Highlights
 
 - **Navigation3 Alpha**: Implementation of Google's latest navigation library with type-safe navigation
 - **MVI Pattern**: Complete Model-View-Intent architecture with UDF
@@ -11,7 +11,7 @@ A comprehensive showcase of modern Android development using **MVI architecture*
 - **Convention Plugins**: Custom Gradle plugins for consistent build configuration
 - **Offline-First**: NetworkBoundResource pattern for robust data handling
 
-## 📱 Features
+## Features
 
 - **Posts Management**: Browse, search, and view detailed posts
 - **Albums Gallery**: Photo albums with grid layout
@@ -21,7 +21,7 @@ A comprehensive showcase of modern Android development using **MVI architecture*
 - **Search Functionality**: Real-time filtering across features
 - **Pull-to-Refresh**: Modern Material3 refresh implementation
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ### Multi-Modular Structure
 
@@ -81,7 +81,7 @@ sealed class PostsScreenEffect {
 }
 ```
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 ### Core Technologies
 - **Kotlin**: Primary programming language
@@ -106,7 +106,7 @@ sealed class PostsScreenEffect {
 - **KotlinX Serialization**: Type-safe serialization
 - **Convention Plugins**: Custom Gradle plugins
 
-## 🎯 Key Features Demonstrated
+## Key Features Demonstrated
 
 ### 1. **Navigation3 Implementation**
 - Type-safe navigation with Kotlin serialization
@@ -132,7 +132,7 @@ sealed class PostsScreenEffect {
 - Network error handling
 - Loading state management
 
-## 🚦 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Android Studio Iguana or later
@@ -153,7 +153,7 @@ git clone https://github.com/yourusername/Navigation3-Compose.git
 
 4. Run the app on an emulator or physical device
 
-## 📋 Convention Plugins
+## Convention Plugins
 
 The project uses custom Gradle convention plugins for consistent build configuration:
 
@@ -167,7 +167,7 @@ The project uses custom Gradle convention plugins for consistent build configura
 - `diatomicsoft.database` - Room database setup
 - `diatomicsoft.moshi` - JSON serialization setup
 
-## 📊 Data Flow
+## Data Flow
 
 ```
 UI Layer (Compose) 
@@ -181,7 +181,7 @@ NetworkBoundResource
 Local Database ←→ Remote API
 ```
 
-## 🤝 Contributing
+## Contributing
 
 This is a demo project designed for learning and showcasing modern Android development practices. Feel free to:
 
@@ -190,7 +190,7 @@ This is a demo project designed for learning and showcasing modern Android devel
 3. Submit pull requests
 4. Report issues or suggestions
 
-## 📚 Learning Resources
+## Learning Resources
 
 This project demonstrates concepts from:
 - [Android Architecture Guide](https://developer.android.com/topic/architecture)
@@ -199,11 +199,11 @@ This project demonstrates concepts from:
 - [Multi-module Architecture](https://developer.android.com/topic/modularization)
 - [Clean Architecture Principles](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Google Android Team for Navigation3 and modern architecture guidelines
 - The Android development community for best practices and patterns
