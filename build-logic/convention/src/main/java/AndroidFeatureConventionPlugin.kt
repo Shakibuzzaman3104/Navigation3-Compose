@@ -21,12 +21,18 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 //implementation(project(":core:common_domain"))
 
                 // Define common dependencies for feature modules
-                implementation(libs.findLibrary("hilt-navigation-compose").get())
+                implementation(libs.findLibrary("androidx-hilt-navigation-compose").get())
                 implementation(libs.findLibrary("androidx-navigation-compose").get())
+                implementation(libs.findLibrary("androidx-navigation3-runtime").get())
                 implementation(libs.findLibrary("kotlinx-serialization-json").get())
                 implementation(libs.findLibrary("coil-compose").get())
                 implementation(libs.findLibrary("androidx-constraintlayout-compose").get())
                 implementation(libs.findLibrary("lifecycle-runtime-compose").get())
+                implementation(libs.findLibrary("androidx-material-icons-extended").get())
+                implementation(project(":core:navigation"))
+                implementation(project(":core:network"))
+                implementation(project(":core:database"))
+                implementation(project(":core:ui"))
             }
         }
     }

@@ -18,6 +18,8 @@ class AndroidNavigationConventionPlugin : Plugin<Project> {
             dependencies {
                 implementation(libs.findLibrary("androidx-navigation-compose").get())
                 implementation(libs.findLibrary("kotlinx-serialization-json").get())
+                implementation(libs.findLibrary("androidx-navigation3-runtime").get())
+                implementation(libs.findLibrary("androidx-navigation3-ui").get())
             }
         }
     }

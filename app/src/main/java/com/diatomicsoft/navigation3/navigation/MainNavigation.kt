@@ -12,14 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import com.diatomicsoft.navigation3.ui.screens.albums.AlbumsScreenRoute
-import com.diatomicsoft.navigation3.ui.screens.albums.ImagesScreenRoute
-import com.diatomicsoft.navigation3.ui.screens.posts.PostDetailsRoute
-import com.diatomicsoft.navigation3.ui.screens.posts.PostDetailsScreenRoute
-import com.diatomicsoft.navigation3.ui.screens.posts.PostsScreenRoute
-import com.diatomicsoft.navigation3.ui.screens.todo.ToDoScreenRoute
-import com.diatomicsoft.navigation3.ui.screens.users.UserDetailsScreenRoute
-import com.diatomicsoft.navigation3.ui.screens.users.UsersScreenRoute
+import com.diatomicsoft.core.navigation.NavigationRoute
+import com.diatomicsoft.core.navigation.PostsRoute
+import com.diatomicsoft.core.navigation.TOP_LEVEL_ROUTES
+import com.diatomicsoft.core.navigation.TopLevelBackStack
+import com.diatomicsoft.feature.posts.navigation.postsScreenEntry
+import com.diatomicsoft.feature.album.navigation.albumsScreenEntry
+import com.diatomicsoft.feature.album.navigation.imagesScreenEntry
+import com.diatomicsoft.feature.posts.presentation.post_details.PostDetailsScreenRoute
+import com.diatomicsoft.feature.todo.navigation.todoScreenEntry
+import com.diatomicsoft.feature.users.navigation.usersScreenEntry
+import com.diatomicsoft.feature.users.navigation.userDetailsScreenEntry
 
 @Composable
 fun MainNavigation() {
@@ -49,41 +52,32 @@ fun MainNavigation() {
             modifier = Modifier.padding(padding),
             backStack = topLevelBackStack.backStack,
             onBack = { topLevelBackStack.removeLast() },
-            entryProvider = entryProvider<Any> {
-                entry<PostsRoute> {
-                    PostsScreenRoute { postId, title, body ->
-                        topLevelBackStack.add(
-                            PostDetailsRoute(
-                                postId, title, body
-                            )
-                        )
-                    }
+            entryProvider = entryProvider {
+                postsScreenEntry {
+                    gotoDestination(it, topLevelBackStack)
                 }
-                entry<AlbumsRoute> {
-                    AlbumsScreenRoute { albumId ->
-                        topLevelBackStack.add(ImagesRoute(albumId))
-                    }
+                albumsScreenEntry { albumId ->
+                    topLevelBackStack.add(NavigationRoute.ImagesRoute(albumId))
                 }
-                entry<UsersRoute> {
-                    UsersScreenRoute { userId ->
-                        topLevelBackStack.add(UserDetailsRoute(userId))
-                    }
+                usersScreenEntry { userId ->
+                    topLevelBackStack.add(NavigationRoute.UserDetailsRoute(userId))
                 }
-                entry<ToDoRoute> {
-                    ToDoScreenRoute()
-                }
+                todoScreenEntry()
 
-                entry<PostDetailsRoute> { key ->
+                entry<NavigationRoute.PostDetailsRoute> { key ->
                     PostDetailsScreenRoute(key.postId, key.title, key.body)
                 }
 
-                entry<UserDetailsRoute> {key ->
-                    UserDetailsScreenRoute(key.userId)
-                }
+                userDetailsScreenEntry()
 
-                entry<ImagesRoute> {key ->
-                    ImagesScreenRoute(key.albumId)
-                }
+                imagesScreenEntry()
+
             })
     }
 }
+
+
+
+
+
+

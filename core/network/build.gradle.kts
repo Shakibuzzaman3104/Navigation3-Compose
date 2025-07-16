@@ -16,9 +16,9 @@ dependencies {
     implementation(project(":core:database"))
     
     // Networking
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.moshi)
-    implementation(libs.okhttp3.logging.interceptor)
+    api(libs.retrofit)
+    api(libs.retrofit.converter.moshi)
+    api(libs.okhttp3.logging.interceptor)
     
     // JSON
     implementation(libs.moshi)

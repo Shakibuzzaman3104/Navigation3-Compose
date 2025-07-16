@@ -12,16 +12,29 @@ class ErrorInterceptor @Inject constructor(
     private val networkUtils: NetworkUtils
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
+        if (!networkUtils.isNetworkAvailable()) {
+            throw NetworkException.NoInternetException()
+        }
+
         val request = chain.request()
         val response = try {
             chain.proceed(request)
         } catch (e: Exception) {
             // Handle specific IOException types more granularly
             when (e) {
+                is java.util.concurrent.CancellationException -> {
+                    // Re-throw cancellation exceptions as-is to allow proper flow cancellation
+                    throw e
+                }
                 is java.net.SocketTimeoutException -> throw NetworkException.TimeoutException()
                 is java.net.UnknownHostException -> throw NetworkException.NoInternetException()
                 is java.net.ConnectException -> throw NetworkException.NoInternetException()
                 is java.io.IOException -> {
+                    // Check if it's a cancellation disguised as IOException
+                    if (e.message?.contains("Canceled", ignoreCase = true) == true) {
+                        // Re-throw the original IOException for cancellations
+                        throw e
+                    }
                     // Check actual network connectivity
                     if (!networkUtils.isNetworkAvailable()) {
                         throw NetworkException.NoInternetException()

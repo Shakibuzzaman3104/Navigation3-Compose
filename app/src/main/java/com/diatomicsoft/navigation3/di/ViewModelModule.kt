@@ -1,9 +1,9 @@
 package com.diatomicsoft.navigation3.di
 
-import com.diatomicsoft.navigation3.data.repository.PostDetailsRepositoryImpl
-import com.diatomicsoft.navigation3.data.repository.PostsRepositoryImpl
-import com.diatomicsoft.navigation3.domain.repository.PostDetailsRepository
-import com.diatomicsoft.navigation3.domain.repository.PostsRepository
+import com.diatomicsoft.feature.posts.data.PostDetailsRepositoryImpl
+import com.diatomicsoft.feature.posts.data.PostsRepositoryImpl
+import com.diatomicsoft.feature.posts.domain.PostDetailsRepository
+import com.diatomicsoft.feature.posts.domain.PostsRepository
 import com.diatomicsoft.core.database.dao.CommentDao
 import com.diatomicsoft.core.database.dao.PostDao
 import com.diatomicsoft.core.network.api.PostsApiService

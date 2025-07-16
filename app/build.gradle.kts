@@ -12,9 +12,14 @@ android {
 
 dependencies {
 
-    implementation(project(":core:database"))
-    implementation(project(":core:network"))
-    
+    implementation(projects.core.database)
+    implementation(projects.core.network)
+    implementation(projects.core.navigation)
+    implementation(projects.feature.album)
+    implementation(projects.feature.posts)
+    implementation(projects.feature.users)
+    implementation(projects.feature.todo)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -44,7 +49,7 @@ dependencies {
     implementation(libs.moshi) // Or the latest version
     implementation(libs.moshi.kotlin) // For Kotlin extensions
     ksp(libs.moshi.kotlin.codegen)
-    
+
     // Network dependencies needed for DI
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)

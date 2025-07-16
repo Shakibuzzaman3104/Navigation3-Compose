@@ -1,11 +1,10 @@
 package com.diatomicsoft.core.network.di
 
 import android.content.Context
-import com.diatomicsoft.core.network.interceptors.AuthInterceptor
 import com.diatomicsoft.core.network.interceptors.ErrorInterceptor
 import com.diatomicsoft.core.network.interceptors.NetworkLoggingInterceptor
-import com.diatomicsoft.core.network.utils.NetworkUtils
 import com.diatomicsoft.core.network.utils.NetworkMonitor
+import com.diatomicsoft.core.network.utils.NetworkUtils
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -47,14 +46,12 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        authInterceptor: AuthInterceptor,
         errorInterceptor: ErrorInterceptor,
         loggingInterceptor: NetworkLoggingInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
-        .addInterceptor(authInterceptor)
         .addInterceptor(errorInterceptor)
         .addInterceptor(loggingInterceptor.create())
         .build()
